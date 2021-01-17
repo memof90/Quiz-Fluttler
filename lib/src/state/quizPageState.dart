@@ -7,18 +7,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  // present icons to answer its corect o incorrect
   List<Icon> sckoreKeeper = [];
-
+// present question
   List<String> questions = [
     'You can lead a cow down stairs but not up stairs.',
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.'
   ];
-
   int questionNumber = 0;
+// present if question its true o false
+  List<bool> answer = [false, true, true];
 
   @override
   Widget build(BuildContext context) {
+    // correct varibel local
+    bool correctAnswer;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,7 +49,17 @@ class _QuizPageState extends State<QuizPage> {
               'True',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
-            onPressed: () => {questionNumber++, print(questionNumber++)},
+            onPressed: () => {
+              correctAnswer = answer[questionNumber],
+              if (correctAnswer == true)
+                {print('User got it right!')}
+              else
+                {print('User got it wrong!')},
+              setState(() {
+                questionNumber++;
+              }),
+              print(questionNumber++)
+            },
           ),
         )),
         Expanded(
@@ -58,7 +72,17 @@ class _QuizPageState extends State<QuizPage> {
               'False',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
-            onPressed: () => {questionNumber++, print(questionNumber++)},
+            onPressed: () => {
+              correctAnswer = answer[questionNumber],
+              if (correctAnswer == false)
+                {print('User got it right!')}
+              else
+                {print('User got it wrong!')},
+              setState(() {
+                questionNumber++;
+              }),
+              print(questionNumber++)
+            },
           ),
         )),
         Row(
