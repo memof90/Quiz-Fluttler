@@ -1,7 +1,9 @@
 import 'package:quizzler/src/Model/questionModel.dart';
 
 class QuizBrain {
-  List<Question> questionBank = [
+  int _questionNumber = 0;
+
+  List<Question> _questionBank = [
     Question(q: 'Some cats are actually allergic to humans', a: true),
     Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
     Question(
@@ -30,4 +32,14 @@ class QuizBrain {
         q: 'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         a: true),
   ];
+  // function to pass question text Encapsulaption
+  String getQuestionText() => _questionBank[_questionNumber].questionText;
+  // function to pass question Answer Encapsulaption
+  bool getQuestionAnswer() => _questionBank[_questionNumber].questionAnswer;
+  // function to validate index to evitate crahs
+  void validNextQuestion() {
+    if (_questionNumber < _questionBank.length - 1) {
+      _questionNumber++;
+    }
+  }
 }

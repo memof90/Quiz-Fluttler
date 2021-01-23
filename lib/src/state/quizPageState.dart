@@ -17,7 +17,7 @@ class _QuizPageState extends State<QuizPage> {
   //   'Approximately one quarter of human bones are in the feet.',
   //   'A slug\'s blood is green.'
   // ];
-  int questionNumber = 0;
+  // int questionNumber = 0;
 // present if question its true o false
   // List<bool> answer = [false, true, true];
 
@@ -49,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
               padding: EdgeInsets.all(10.0),
               child: Center(
                 child: Text(
-                  quizBrain.questionBank[questionNumber].questionText,
+                  quizBrain.getQuestionText(),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25.0, color: Colors.white),
                 ),
@@ -66,16 +66,14 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
             onPressed: () => {
-              correctAnswer =
-                  quizBrain.questionBank[questionNumber].questionAnswer,
+              correctAnswer = quizBrain.getQuestionAnswer(),
               if (correctAnswer == true)
                 {print('User got it right!')}
               else
                 {print('User got it wrong!')},
               setState(() {
-                questionNumber++;
+                quizBrain.validNextQuestion();
               }),
-              print(questionNumber++)
             },
           ),
         )),
@@ -90,16 +88,14 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
             onPressed: () => {
-              correctAnswer =
-                  quizBrain.questionBank[questionNumber].questionAnswer,
+              correctAnswer = quizBrain.getQuestionAnswer(),
               if (correctAnswer == false)
                 {print('User got it right!')}
               else
                 {print('User got it wrong!')},
               setState(() {
-                questionNumber++;
+                quizBrain.validNextQuestion();
               }),
-              print(questionNumber++)
             },
           ),
         )),
