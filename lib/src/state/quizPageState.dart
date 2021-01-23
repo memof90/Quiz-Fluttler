@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/src/Model/questionModel.dart';
+// import 'package:quizzler/src/Model/questionModel.dart';
+import 'package:quizzler/src/Model/quiz_brain.dart';
 
 // manage state of fluttler app
 class QuizPage extends StatefulWidget {
@@ -20,13 +21,16 @@ class _QuizPageState extends State<QuizPage> {
 // present if question its true o false
   // List<bool> answer = [false, true, true];
 
-  List<Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: true),
-  ];
+  // List<Question> questionBank = [
+  //   Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+  //   Question(
+  //       q: 'Approximately one quarter of human bones are in the feet.',
+  //       a: true),
+  //   Question(q: 'A slug\'s blood is green.', a: true),
+  // ];
+
+/*   Object to pass data list quiz_brain */
+  QuizBrain quizBrain = QuizBrain();
 
   // Question q1 = Question(
   //     q: 'You can lead a cow down stairs but not up stairs.', a: false);
@@ -45,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
               padding: EdgeInsets.all(10.0),
               child: Center(
                 child: Text(
-                  questionBank[questionNumber].questionText,
+                  quizBrain.questionBank[questionNumber].questionText,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25.0, color: Colors.white),
                 ),
@@ -62,7 +66,8 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
             onPressed: () => {
-              correctAnswer = questionBank[questionNumber].questionAnswer,
+              correctAnswer =
+                  quizBrain.questionBank[questionNumber].questionAnswer,
               if (correctAnswer == true)
                 {print('User got it right!')}
               else
@@ -85,7 +90,8 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
             onPressed: () => {
-              correctAnswer = questionBank[questionNumber].questionAnswer,
+              correctAnswer =
+                  quizBrain.questionBank[questionNumber].questionAnswer,
               if (correctAnswer == false)
                 {print('User got it right!')}
               else
