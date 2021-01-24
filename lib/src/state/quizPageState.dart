@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 // import 'package:quizzler/src/Model/questionModel.dart';
 import 'package:quizzler/src/Model/quiz_brain.dart';
 
+// pacakages externt
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 // manage state of fluttler app
 class QuizPage extends StatefulWidget {
   @override
@@ -32,13 +35,33 @@ class _QuizPageState extends State<QuizPage> {
 /*   Object to pass data list quiz_brain */
   QuizBrain quizBrain = QuizBrain();
 
+  bool correctAnswers;
+
+  // print buttons correct and error
+  void checkAnswer(bool userPickerAnswer) => {
+        correctAnswers = quizBrain.getQuestionAnswer(),
+        setState(() {
+          if (userPickerAnswer == correctAnswers) {
+            sckoreKeeper.add(Icon(
+              Icons.check,
+              color: Colors.green,
+            ));
+          } else {
+            sckoreKeeper.add(Icon(
+              Icons.close,
+              color: Colors.red,
+            ));
+          }
+
+          quizBrain.validNextQuestion();
+        }),
+      };
+
   // Question q1 = Question(
   //     q: 'You can lead a cow down stairs but not up stairs.', a: false);
 
   @override
   Widget build(BuildContext context) {
-    // correct varibel local
-    bool correctAnswer;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,16 +88,7 @@ class _QuizPageState extends State<QuizPage> {
               'True',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
-            onPressed: () => {
-              correctAnswer = quizBrain.getQuestionAnswer(),
-              if (correctAnswer == true)
-                {print('User got it right!')}
-              else
-                {print('User got it wrong!')},
-              setState(() {
-                quizBrain.validNextQuestion();
-              }),
-            },
+            onPressed: () => {checkAnswer(true)},
           ),
         )),
         Expanded(
@@ -87,16 +101,7 @@ class _QuizPageState extends State<QuizPage> {
               'False',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
-            onPressed: () => {
-              correctAnswer = quizBrain.getQuestionAnswer(),
-              if (correctAnswer == false)
-                {print('User got it right!')}
-              else
-                {print('User got it wrong!')},
-              setState(() {
-                quizBrain.validNextQuestion();
-              }),
-            },
+            onPressed: () => {checkAnswer(false)},
           ),
         )),
         Row(
