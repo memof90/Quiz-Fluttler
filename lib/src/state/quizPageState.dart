@@ -41,20 +41,31 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userPickerAnswer) => {
         correctAnswers = quizBrain.getQuestionAnswer(),
         setState(() {
-          if (userPickerAnswer == correctAnswers) {
-            sckoreKeeper.add(Icon(
-              Icons.check,
-              color: Colors.green,
-            ));
-          } else {
-            sckoreKeeper.add(Icon(
-              Icons.close,
-              color: Colors.red,
-            ));
-          }
+          if (quizBrain.isFinished() == true) {
+            Alert(
+              context: context,
+              title: 'Finished!',
+              desc: 'you\'ve reached the end of the quiz.',
+            ).show();
 
-          quizBrain.validNextQuestion();
-        }),
+            quizBrain.reset();
+
+            sckoreKeeper = [];
+          } else {
+            if (userPickerAnswer == correctAnswers) {
+              sckoreKeeper.add(Icon(
+                Icons.check,
+                color: Colors.green,
+              ));
+            } else {
+              sckoreKeeper.add(Icon(
+                Icons.close,
+                color: Colors.red,
+              ));
+            }
+            quizBrain.validNextQuestion();
+          }
+        })
       };
 
   // Question q1 = Question(
